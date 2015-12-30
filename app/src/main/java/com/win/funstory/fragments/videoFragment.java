@@ -19,6 +19,7 @@ import com.win.funstory.R;
 import com.win.funstory.adapters.videoAdapter;
 import com.win.funstory.domain.Item;
 import com.win.funstory.domain.Video_item;
+import com.win.funstory.pingLun2Activity;
 import com.win.funstory.pingLunActivity;
 
 import org.json.JSONArray;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class videoFragment extends Fragment implements Callback {
+public class videoFragment extends Fragment implements Callback, AdapterView.OnItemClickListener {
     private  ListView listView;
 
     private videoAdapter adapter;
@@ -46,7 +47,7 @@ public class videoFragment extends Fragment implements Callback {
         listView=(ListView)view.findViewById(R.id.list_video);
         adapter=new videoAdapter(getContext());
         listView.setAdapter(adapter);
-
+        listView.setOnItemClickListener(this);
 
         OkHttpClient client=new OkHttpClient();
         Request request=new Request.Builder().url("http://m2.qiushibaike.com/article/list/video?page=").get().build();
@@ -94,4 +95,14 @@ public class videoFragment extends Fragment implements Callback {
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Video_item item=  list.get(position);
+
+        Intent intent=new Intent(getActivity(), pingLun2Activity.class);
+        Bundle bundle=new Bundle();
+        bundle.putSerializable("Video_item",item);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 }

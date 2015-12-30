@@ -85,7 +85,8 @@ public class enjoyFragment extends Fragment implements Callback, AdapterView.OnI
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               adapter.addAll(list);
+
+                adapter.addAll(list);
             }
         });
     }
@@ -98,6 +99,14 @@ public class enjoyFragment extends Fragment implements Callback, AdapterView.OnI
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getActivity(),pingLunActivity.class));
+
+        Intent intent=new Intent(getActivity(),pingLunActivity.class);
+
+        Item  items =list.get(position);
+
+        Bundle bundle=new Bundle();
+           bundle.putSerializable("items",items);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

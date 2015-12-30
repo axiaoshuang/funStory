@@ -3,18 +3,29 @@ package com.win.funstory.domain;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * author：WangShuang
  * Date: 2015/12/29 16:08
  * email：m15046658245_1@163.com
  */
-public class zuiXItem {
+public class zuiXItem implements Serializable {
     private  long userId;
     private  String userIcon;
     private  String username;
     private String content;
     private String image;
 
+    public long getPid() {
+        return pid;
+    }
+
+    public void setPid(long pid) {
+        this.pid = pid;
+    }
+
+    private long pid;
 
     private int up;
     private int comments_count;
@@ -65,6 +76,7 @@ public class zuiXItem {
        }
         content=object.getString("content");
 
+        pid=object.getLong("id");
         up=object.getJSONObject("votes").getInt("up");
 
 

@@ -24,6 +24,17 @@
             android:label="@string/title_activity_ping_lun"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity android:name=".pingLun2Activity" >
+        </activity>
+        <activity android:name=".pingLun3Activity" >
+        </activity>
+        <activity android:name=".pingLun4Activity" >
+        </activity>
+        <activity
+            android:name=".pingLun5Activity"
+            android:label="@string/title_activity_ping_lun5"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>
