@@ -1,12 +1,14 @@
 package com.win.funstory.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.squareup.okhttp.Response;
 import com.win.funstory.R;
 import com.win.funstory.adapters.enjoyAdapter;
 import com.win.funstory.domain.Item;
+import com.win.funstory.pingLunActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +29,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class enjoyFragment extends Fragment implements Callback {
+public class enjoyFragment extends Fragment implements Callback, AdapterView.OnItemClickListener {
 
     private ListView listView;
     private enjoyAdapter adapter;
@@ -45,6 +48,7 @@ public class enjoyFragment extends Fragment implements Callback {
         System.out.println("listView"+listView);
         System.out.println("adapter" + adapter);
        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
 
         OkHttpClient client=new OkHttpClient();
         Request request=new Request.Builder().url("http://m2.qiushibaike.com/article/list/suggest?page=").get().build();
@@ -92,4 +96,8 @@ public class enjoyFragment extends Fragment implements Callback {
         call.cancel();
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        startActivity(new Intent(getActivity(),pingLunActivity.class));
+    }
 }

@@ -1,11 +1,13 @@
 package com.win.funstory.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.okhttp.Call;
@@ -17,6 +19,7 @@ import com.win.funstory.R;
 import com.win.funstory.adapters.videoAdapter;
 import com.win.funstory.domain.Item;
 import com.win.funstory.domain.Video_item;
+import com.win.funstory.pingLunActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +46,7 @@ public class videoFragment extends Fragment implements Callback {
         listView=(ListView)view.findViewById(R.id.list_video);
         adapter=new videoAdapter(getContext());
         listView.setAdapter(adapter);
+
 
         OkHttpClient client=new OkHttpClient();
         Request request=new Request.Builder().url("http://m2.qiushibaike.com/article/list/video?page=").get().build();
@@ -78,7 +82,8 @@ public class videoFragment extends Fragment implements Callback {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               adapter.addAll(list);
+
+                adapter.addAll(list);
             }
         });
     }
@@ -87,4 +92,6 @@ public class videoFragment extends Fragment implements Callback {
         super.onStop();
         call.cancel();
     }
+
+
 }
