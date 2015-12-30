@@ -25,6 +25,7 @@ public class MyAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
         return TabsFragment.newInstance(list.get(position));
     }
 
@@ -35,6 +36,9 @@ public class MyAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
+
         return list.get(position);
     }
+
+
 }

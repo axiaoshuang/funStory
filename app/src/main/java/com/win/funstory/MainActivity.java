@@ -2,6 +2,8 @@ package com.win.funstory;
 
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,7 +12,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.win.funstory.adapters.FragmnetAdapter;
 import com.win.funstory.adapters.MyAdapter;
+import com.win.funstory.fragments.chunTFragment;
+import com.win.funstory.fragments.chunWFragment;
+import com.win.funstory.fragments.enjoyFragment;
+import com.win.funstory.fragments.videoFragment;
+import com.win.funstory.fragments.zuiXFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +31,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ViewPager pager;
     private TabLayout tab;
 
-
-
+    private  List<Fragment> fragments;
+   // private FragmnetAdapter;
    // private ActionBarToggle mActionBarToggle;
 
     @Override
@@ -39,14 +47,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tab= (TabLayout) findViewById(R.id.tab);
         pager= (ViewPager) findViewById(R.id.viewPager);
 
-        List<String>  list=new ArrayList<>();
-        list.add("专享");
-        list.add("视频");
-        list.add("纯文");
-        list.add("纯图");
-        list.add("精华");
 
-        pager.setAdapter(new MyAdapter(getSupportFragmentManager(), list));
+        fragments=new ArrayList<>();
+
+        Fragment  fragment=new enjoyFragment();
+        fragments.add(fragment);
+
+        fragment=new videoFragment();
+        fragments.add(fragment);
+
+
+        fragment=new chunWFragment();
+        fragments.add(fragment);
+
+
+         fragment=new chunTFragment();
+        fragments.add(fragment);
+
+
+        fragment=new zuiXFragment();
+        fragments.add(fragment);
+
+        FragmnetAdapter adapters=new FragmnetAdapter(getSupportFragmentManager(),fragments);
+
+
+
+
+//        List<String>  list=new ArrayList<>();
+//        list.add("专享");
+//        list.add("视频");
+//        list.add("纯文");
+//        list.add("纯图");
+//        list.add("精华");
+
+     //   pager.setAdapter(new MyAdapter(getSupportFragmentManager(), list));
+        pager.setAdapter(adapters);
+       // pager.addOnPageChangeListener(this);
         tab.setupWithViewPager(pager);
 
 
@@ -88,4 +124,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         slidingPaneLayout.closePane();
         return true;
     }
+
 }
